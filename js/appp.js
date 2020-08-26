@@ -4,10 +4,11 @@
 var imgArray = [];
 
 //DOM process
-
+var resultEl = document.getElementById('result');
 var imgElOne = document.getElementById('image-one');
 var imgElTwo = document.getElementById('image-two');
 var imgElthree = document.getElementById('image-three');
+var count = 0;
 
 // constructor
 
@@ -69,19 +70,40 @@ function renderImage() {
   imgThree.viewed++;
 }
 
+var result ='';
+function renderResult(){
+  for(var i = 0 ; i < imgArray.length; i++){
+    result = `${imgArray[i].alt} had ${imgArray[i].clicked} vote and was seen ${imgArray[i].viewed} time.`;
+    var liEl = document.createElement('li');
+    liEl.textContent= result;
+    resultEl.append(liEl);
+    console.log(result);
+  }
+}
+
 imgElOne.addEventListener('click', eventHandler);
 imgElTwo.addEventListener('click', eventHandler);
 imgElthree.addEventListener('click', eventHandler);
 
-function eventHandler(e){
+function eventHandler(e) {
   console.log(e.target.alt);
   // counting the number of click, we need to go the the entire array and check the proprety of that element has been clicked before:
-  for(var i = 0 ; i < imgArray.length; i++){
-    if(imgArray[i].alt === e.target.alt){
-      imgArray[i].clicked++; // it's not saving the imgArray.clicked value when the image change... :(
-      renderImage();
+  for (var i = 0; i < imgArray.length; i++) {
+    if (imgArray[i].alt === e.target.alt) {
+      imgArray[i].clicked++;
+      console.log(imgArray[i].clicked);
+      break;
     }
+  }
+  count++;
+  renderImage();
+  if (count === 25) {
+    imgElOne.removeEventListener('click', eventHandler);
+    imgElTwo.removeEventListener('click', eventHandler);
+    imgElthree.removeEventListener('click', eventHandler);
+    renderResult();
   }
 }
 renderImage();
+
 

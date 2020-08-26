@@ -1,4 +1,6 @@
 body {
+  width: 1000px;
+  margin:auto;
   text-align: center;
   background-color: rgb(6, 61, 6);
   box-sizing: border-box padding-box;
@@ -34,10 +36,14 @@ header>img {
 }
 
 p{
+  font-size: 20px;
+  margin-top: 50px;
   color: white;
+  margin-bottom: 50px;
 }
 
 #image{
+  
   margin: auto;
   padding-bottom: 10px;
   padding-top: 10px;
@@ -45,4 +51,8 @@ p{
   border: 30px solid rgba(238, 215, 9, 0.849);
   border-radius: 20px;
   background:white;
+}
+li{
+  color: white;
+  font-size: 20px;
 }
