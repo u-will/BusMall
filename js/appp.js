@@ -172,7 +172,7 @@ function eventHandler(e) {
   }
   count++;
   renderImage();
-  if (count === 5) {
+  if (count === 25) {
     imgElOne.removeEventListener('click', eventHandler);
     imgElTwo.removeEventListener('click', eventHandler);
     imgElthree.removeEventListener('click', eventHandler);
