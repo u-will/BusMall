@@ -5,6 +5,8 @@ var imgArray = [];
 var altArray = [];
 var viewedArray = [];
 var clickedArray = [];
+var backgroundColorArray = [];
+var borderColorArray= [];
 
 //DOM process
 var resultEl = document.getElementById('result');
@@ -90,6 +92,21 @@ function renderChart() {
     altArray.push(imgArray[i].alt);
     viewedArray.push(imgArray[i].viewed);
     clickedArray.push(imgArray[i].clicked);
+    backgroundColorArray.push('rgba(255, 99, 132, 0.2)');
+    borderColorArray.push('rgba(255, 99, 132, 1)');
+
+    //THIS IS IF YOU WANNA MAKE DIFFERENT COLLOR DEPENDING OF THE NUMBER OF VOTE :)
+
+    // if(imgArray[i].clicked <= 2){
+    //   backgroundColorArray.push('rgba(255, 99, 132, 0.2)');
+    //   borderColorArray.push('rgba(255, 99, 132, 1)');
+    // }else if (3<= imgArray[i].clicked <= 5){
+    //   backgroundColorArray.push( 'rgba(75, 192, 192, 0.2)');
+    //   borderColorArray.push('rgba(75, 192, 192, 1)');
+    // }else{
+    //   backgroundColorArray.push('rgba(54, 162, 235, 0.2)');
+    //   borderColorArray.push('rgba(54, 162, 235, 1)');
+    // }
   }
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
@@ -99,49 +116,21 @@ function renderChart() {
       datasets: [{
         label: '# of Votes',
         data: clickedArray,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
+        backgroundColor: backgroundColorArray,
+        borderColor: borderColorArray ,
+        borderWidth: 5
       }, {
         label: '# of Views',
         data: viewedArray,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        // hoverBackgroundColor: "yellow",
-        borderWidth: 1
+        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+        borderColor: 'rgba(255, 159, 64, 1)',
+        hoverBackgroundColor: 'yellow',
+        borderWidth: 5
       }]
     },
     options: {
       // responsive : false,
-      maintainAspectRatio: false,
+      // maintainAspectRatio: false,
       scales: {
         yAxes: [{
           ticks: {
@@ -152,7 +141,7 @@ function renderChart() {
 
     }
   });
-  // ctx.canvas.width = 600;
+  // ctx.canvas.width = 100;
   // ctx.canvas.height = 100;   // this works when the maintainAspectRatio is coment it out
 }
 
@@ -176,7 +165,7 @@ function eventHandler(e) {
     imgElOne.removeEventListener('click', eventHandler);
     imgElTwo.removeEventListener('click', eventHandler);
     imgElthree.removeEventListener('click', eventHandler);
-    renderResult();
+    // renderResult();
     renderChart();
   }
 }

@@ -56,7 +56,10 @@ li{
   color: white;
   font-size: 20px;
 }
-canvas{
-  height: 600px;
-  width: 950px;
+ul {
+  margin-bottom:100px;
+}
+
+#myChart{
+  margin-bottom:100px;
 }
