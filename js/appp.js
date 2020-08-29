@@ -7,7 +7,7 @@ var altArray = [];
 var viewedArray = [];
 var clickedArray = [];
 var backgroundColorArray = [];
-var borderColorArray= [];
+var borderColorArray = [];
 
 //DOM process
 var resultEl = document.getElementById('result');
@@ -26,27 +26,33 @@ function Pic(alt, src) {
   imgArray.push(this);
 }
 
-new Pic('bag', '../img/bag.jpg');
-new Pic('banana', '../img/banana.jpg');
-new Pic('bathroom', '../img/bathroom.jpg');
-new Pic('boots', '../img/boots.jpg');
-new Pic('breakfast', '../img/breakfast.jpg');
-new Pic('bubblegum', '../img/bubblegum.jpg');
-new Pic('chair', '../img/chair.jpg');
-new Pic('cthulhu', '../img/cthulhu.jpg');
-new Pic('dog-duck', '../img/dog-duck.jpg');
-new Pic('dragon', '../img/dragon.jpg');
-new Pic('pen', '../img/pen.jpg');
-new Pic('pet-sweep', '../img/pet-sweep.jpg');
-new Pic('scissors', '../img/scissors.jpg');
-new Pic('shark', '../img/shark.jpg');
-new Pic('sweep', '../img/sweep.png');
-new Pic('tauntaun', '../img/tauntaun.jpg');
-new Pic('unicorn', '../img/unicorn.jpg');
-new Pic('usb', '../img/usb.gif');
-new Pic('water-can', '../img/water-can.jpg');
-new Pic('wine-glass', '../img/wine-glass.jpg');
-
+// asigning the value of the imgArray to another variable
+var retrievedImage = localStorage.getItem('image');
+// check if the value of that variable is null (if there is not data in the imgArray)
+if (retrievedImage) { //this line of code mians ifretrievedImage === true, get inside of this if statement which actually meeans that the retrievedImage is not null 'cause went it's null the value for that variable is false
+  imgArray = JSON.parse(retrievedImage);
+} else {
+  new Pic('bag', '../img/bag.jpg');
+  new Pic('banana', '../img/banana.jpg');
+  new Pic('bathroom', '../img/bathroom.jpg');
+  new Pic('boots', '../img/boots.jpg');
+  new Pic('breakfast', '../img/breakfast.jpg');
+  new Pic('bubblegum', '../img/bubblegum.jpg');
+  new Pic('chair', '../img/chair.jpg');
+  new Pic('cthulhu', '../img/cthulhu.jpg');
+  new Pic('dog-duck', '../img/dog-duck.jpg');
+  new Pic('dragon', '../img/dragon.jpg');
+  new Pic('pen', '../img/pen.jpg');
+  new Pic('pet-sweep', '../img/pet-sweep.jpg');
+  new Pic('scissors', '../img/scissors.jpg');
+  new Pic('shark', '../img/shark.jpg');
+  new Pic('sweep', '../img/sweep.png');
+  new Pic('tauntaun', '../img/tauntaun.jpg');
+  new Pic('unicorn', '../img/unicorn.jpg');
+  new Pic('usb', '../img/usb.gif');
+  new Pic('water-can', '../img/water-can.jpg');
+  new Pic('wine-glass', '../img/wine-glass.jpg');
+}
 
 // Random fuction to make sure that we are getting random image
 
@@ -93,8 +99,10 @@ function renderChart() {
     altArray.push(imgArray[i].alt);
     viewedArray.push(imgArray[i].viewed);
     clickedArray.push(imgArray[i].clicked);
-    backgroundColorArray.push('rgba(255, 99, 132, 0.2)');
-    borderColorArray.push('rgba(255, 99, 132, 1)');
+    // asgning random color to the value that we clicked on...
+    var randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+    backgroundColorArray.push(randomColor);
+    borderColorArray.push(randomColor);
 
     //THIS IS IF YOU WANNA MAKE DIFFERENT COLLOR DEPENDING OF THE NUMBER OF VOTE :)
 
@@ -119,7 +127,7 @@ function renderChart() {
         label: '# of Votes',
         data: clickedArray,
         backgroundColor: backgroundColorArray,
-        borderColor: borderColorArray ,
+        borderColor: borderColorArray,
         hoverBackgroundColor: 'blue',
         borderWidth: 5
       }, {
@@ -164,12 +172,17 @@ function eventHandler(e) {
   }
   count++;
   renderImage();
-  if (count === 25) {
+  if (count === 5) {
     imgElOne.removeEventListener('click', eventHandler);
     imgElTwo.removeEventListener('click', eventHandler);
     imgElthree.removeEventListener('click', eventHandler);
-    // renderResult();
+    renderResult();
     renderChart();
+
+    //we will Stringify thing o it can be more humain readible
+    var stringifyImageArray = JSON.stringify(imgArray);
+    // saving that array in the local storage
+    localStorage.setItem('image', stringifyImageArray);
   }
 }
 renderImage();
