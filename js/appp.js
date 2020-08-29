@@ -29,29 +29,29 @@ function Pic(alt, src) {
 // asigning the value of the imgArray to another variable
 var retrievedImage = localStorage.getItem('image');
 // check if the value of that variable is null (if there is not data in the imgArray)
-if (retrievedImage) { //this line of code mians ifretrievedImage === true, get inside of this if statement which actually meeans that the retrievedImage is not null 'cause went it's null the value for that variable is false
+if (retrievedImage) { //( if retrievedImage existe) this line of code mians ifretrievedImage === true, get inside of this if statement which actually meeans that the retrievedImage is not null 'cause went it's null the value for that variable is false
   imgArray = JSON.parse(retrievedImage);
 } else {
-  new Pic('bag', '../img/bag.jpg');
-  new Pic('banana', '../img/banana.jpg');
-  new Pic('bathroom', '../img/bathroom.jpg');
-  new Pic('boots', '../img/boots.jpg');
-  new Pic('breakfast', '../img/breakfast.jpg');
-  new Pic('bubblegum', '../img/bubblegum.jpg');
-  new Pic('chair', '../img/chair.jpg');
-  new Pic('cthulhu', '../img/cthulhu.jpg');
-  new Pic('dog-duck', '../img/dog-duck.jpg');
-  new Pic('dragon', '../img/dragon.jpg');
-  new Pic('pen', '../img/pen.jpg');
-  new Pic('pet-sweep', '../img/pet-sweep.jpg');
-  new Pic('scissors', '../img/scissors.jpg');
-  new Pic('shark', '../img/shark.jpg');
-  new Pic('sweep', '../img/sweep.png');
-  new Pic('tauntaun', '../img/tauntaun.jpg');
-  new Pic('unicorn', '../img/unicorn.jpg');
-  new Pic('usb', '../img/usb.gif');
-  new Pic('water-can', '../img/water-can.jpg');
-  new Pic('wine-glass', '../img/wine-glass.jpg');
+  new Pic('bag', './img/bag.jpg');
+  new Pic('banana', './img/banana.jpg');
+  new Pic('bathroom', './img/bathroom.jpg');
+  new Pic('boots', './img/boots.jpg');
+  new Pic('breakfast', './img/breakfast.jpg');
+  new Pic('bubblegum', './img/bubblegum.jpg');
+  new Pic('chair', './img/chair.jpg');
+  new Pic('cthulhu', './img/cthulhu.jpg');
+  new Pic('dog-duck', './img/dog-duck.jpg');
+  new Pic('dragon', './img/dragon.jpg');
+  new Pic('pen', './img/pen.jpg');
+  new Pic('pet-sweep', './img/pet-sweep.jpg');
+  new Pic('scissors', './img/scissors.jpg');
+  new Pic('shark', './img/shark.jpg');
+  new Pic('sweep', './img/sweep.png');
+  new Pic('tauntaun', './img/tauntaun.jpg');
+  new Pic('unicorn', './img/unicorn.jpg');
+  new Pic('usb', './img/usb.gif');
+  new Pic('water-can', './img/water-can.jpg');
+  new Pic('wine-glass', './img/wine-glass.jpg');
 }
 
 // Random fuction to make sure that we are getting random image
@@ -172,7 +172,7 @@ function eventHandler(e) {
   }
   count++;
   renderImage();
-  if (count === 5) {
+  if (count === 25) {
     imgElOne.removeEventListener('click', eventHandler);
     imgElTwo.removeEventListener('click', eventHandler);
     imgElthree.removeEventListener('click', eventHandler);
