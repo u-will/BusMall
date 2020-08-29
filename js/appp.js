@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 'use strict';
 
 // Array in which we will store all our image
@@ -109,6 +110,7 @@ function renderChart() {
     // }
   }
   var ctx = document.getElementById('myChart').getContext('2d');
+  // eslint-disable-next-line no-unused-vars
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -118,6 +120,7 @@ function renderChart() {
         data: clickedArray,
         backgroundColor: backgroundColorArray,
         borderColor: borderColorArray ,
+        hoverBackgroundColor: 'blue',
         borderWidth: 5
       }, {
         label: '# of Views',
