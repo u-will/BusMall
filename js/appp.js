@@ -2,6 +2,9 @@
 
 // Array in which we will store all our image
 var imgArray = [];
+var altArray = [];
+var viewedArray = [];
+var clickedArray = [];
 
 //DOM process
 var resultEl = document.getElementById('result');
@@ -48,6 +51,7 @@ function radomNumber(max) {
   return Math.floor(Math.random() * max);// exclude the last value (the max value)
 }
 
+
 function renderImage() {
   // getting the random object from the Array:
   var imgOne = imgArray[radomNumber(imgArray.length)];
@@ -70,15 +74,86 @@ function renderImage() {
   imgThree.viewed++;
 }
 
-var result ='';
-function renderResult(){
-  for(var i = 0 ; i < imgArray.length; i++){
+var result = '';
+function renderResult() {
+  for (var i = 0; i < imgArray.length; i++) {
     result = `${imgArray[i].alt} had ${imgArray[i].clicked} vote and was seen ${imgArray[i].viewed} time.`;
     var liEl = document.createElement('li');
-    liEl.textContent= result;
+    liEl.textContent = result;
     resultEl.append(liEl);
     console.log(result);
   }
+}
+
+function renderChart() {
+  for (var i = 0; i < imgArray.length; i++) {
+    altArray.push(imgArray[i].alt);
+    viewedArray.push(imgArray[i].viewed);
+    clickedArray.push(imgArray[i].clicked);
+  }
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: altArray,
+      datasets: [{
+        label: '# of Votes',
+        data: clickedArray,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }, {
+        label: '# of Views',
+        data: viewedArray,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        // hoverBackgroundColor: "yellow",
+        borderWidth: 1
+      }]
+    },
+    options: {
+      // responsive : false,
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+
+    }
+  });
+  // ctx.canvas.width = 600;
+  // ctx.canvas.height = 100;   // this works when the maintainAspectRatio is coment it out
 }
 
 imgElOne.addEventListener('click', eventHandler);
@@ -102,8 +177,11 @@ function eventHandler(e) {
     imgElTwo.removeEventListener('click', eventHandler);
     imgElthree.removeEventListener('click', eventHandler);
     renderResult();
+    renderChart();
   }
 }
 renderImage();
+
+
 
 
